@@ -9,4 +9,5 @@ import lombok.*;
 public class RoleDTOView {
     private Long id;
     private String name;
+
 }
