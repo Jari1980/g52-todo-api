@@ -9,7 +9,7 @@ import se.lexicon.g52todoapi.repository.RoleRepository;
 
 import java.util.Arrays;
 
-@Profile({"test","dev"}) // TODO: Verify if it works
+//@Profile({"test","dev"})
 @Component
 public class RoleDataLoader implements CommandLineRunner {
 
