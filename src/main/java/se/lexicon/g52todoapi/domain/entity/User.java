@@ -12,10 +12,11 @@ import java.util.TreeSet;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(exclude = "roles")
+@EqualsAndHashCode
 @Builder
 
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @NonNull
@@ -60,6 +61,5 @@ public class User {
         }
 
     }
-
 
 }

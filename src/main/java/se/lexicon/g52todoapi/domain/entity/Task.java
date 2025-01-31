@@ -27,5 +27,7 @@ public class Task {
     private boolean done;
 
     // Todo: Start Here - Implement the accurate relationship annotation. Make sure to have a meaningful name for column.
+    @ManyToOne
+    @JoinColumn(name = "person_email")
     private Person person;
 }

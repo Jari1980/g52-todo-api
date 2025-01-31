@@ -11,8 +11,8 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = "tasks") //Needs to be here for some reason
+@EqualsAndHashCode(exclude = "tasks") //Needs to be here for some reason
 @Builder
 
 @Entity
@@ -25,10 +25,13 @@ public class Person {
     private String name;
 
     // Todo: Start Here - Implement the accurate relationship annotation. The foreign key column in Person table shall be "email".
+    @OneToOne//(mappedBy = "email")
     @NonNull
+    @JoinColumn(name = "email")
     private User user;
 
     // Todo: Start Here - Implement the accurate relationship annotation.
+    @OneToMany
     private List<Task> tasks = new ArrayList<>();
 
     public void addTask(Task... tasks) { //task1, task2, task3

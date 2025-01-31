@@ -5,12 +5,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import se.lexicon.g52todoapi.domain.dto.PersonDTOForm;
 import se.lexicon.g52todoapi.domain.dto.RoleDTOForm;
 import se.lexicon.g52todoapi.domain.dto.RoleDTOView;
 import se.lexicon.g52todoapi.domain.dto.UserDTOForm;
+import se.lexicon.g52todoapi.domain.entity.Person;
 import se.lexicon.g52todoapi.domain.entity.User;
+import se.lexicon.g52todoapi.repository.PersonRepository;
+import se.lexicon.g52todoapi.repository.UserRepository;
+import se.lexicon.g52todoapi.service.PersonService;
 import se.lexicon.g52todoapi.service.RoleService;
 import se.lexicon.g52todoapi.service.UserService;
+import se.lexicon.g52todoapi.service.impl.PersonServiceImpl;
 
 import java.util.List;
 import java.util.Set;
@@ -26,8 +32,9 @@ public class G52TodoApiApplication {
 
     @Profile("dev")
     @Bean
-    public CommandLineRunner runner(RoleService roleService, UserService userService) {
+    public CommandLineRunner runner(RoleService roleService, UserService userService, UserRepository userRepository, PersonService personService, PersonServiceImpl personServiceImpl, PersonRepository personRepository) {
         return (args) -> {
+
 
 /*
            List<RoleDTOView> all = roleService.getAll();
@@ -64,6 +71,23 @@ public class G52TodoApiApplication {
                     .build();
 
             userService.register(simon);
+            System.out.println("Funkar det här?? " + userRepository.existsByEmail("simon@lexicon.se"));
+            //userRepository.updateExpiredByEmail("simon@lexicon.se", true);
+            //System.out.println("---" + userRepository.findByEmail("simon@lexicon.se").isExpired());
+
+            //Testing PersonServiceImpl
+            //personRepository.save(new Person(2L, "namnnn", userRepository.findByEmail("simon@lexicon.se"), null));
+            //PersonDTOForm form = PersonDTOForm.builder()
+                 //   .id(1L)
+                //    .name("Jari Testar")
+              //      .build();
+            //personServiceImpl.create(form);
+
+            PersonDTOForm jari = PersonDTOForm.builder()
+                    .id(personRepository.getById(1L).getId())
+                    .name("simon@lexicon.se")
+                    .build();
+            personServiceImpl.create(jari);
 
         };
     }
